@@ -19,6 +19,11 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_svg:
+  firebase_core:
+  firebase_auth:
+  get_it:
+  dartz:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:

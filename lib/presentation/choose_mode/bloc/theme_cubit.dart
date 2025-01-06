@@ -34,7 +34,6 @@ class ThemeCubit extends HydratedCubit<ThemeMode> {
       case ThemeMode.dark:
         themeModeString = 'dark';
         break;
-      case ThemeMode.system:
       default:
         themeModeString = 'system';
         break;

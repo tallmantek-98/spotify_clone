@@ -4,17 +4,16 @@ import 'package:spotify_clone/common/widgets/app_bar/app_bar.dart';
 import 'package:spotify_clone/common/widgets/buttons/basic_app_button.dart';
 import 'package:spotify_clone/core/config/assets/app_vectors.dart';
 import 'package:spotify_clone/core/config/theme/app_colors.dart';
-import 'package:spotify_clone/data/models/auth/create_user_request.dart';
-import 'package:spotify_clone/domain/usecases/auth/signup.dart';
-import 'package:spotify_clone/presentation/auth/pages/signin.dart';
-import 'package:spotify_clone/presentation/root/pages/home.dart';
+import 'package:spotify_clone/data/models/auth/signin_user_request.dart';
+import 'package:spotify_clone/domain/usecases/auth/signin.dart';
+import 'package:spotify_clone/presentation/auth/pages/sign_up.dart';
 
 import '../../../service_locator.dart';
+import '../../root/pages/home.dart';
 
-class SignupPage extends StatelessWidget {
-  SignupPage({super.key});
+class SignInPage extends StatelessWidget {
+  SignInPage({super.key});
 
-  final TextEditingController _fullName = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -27,8 +26,9 @@ class SignupPage extends StatelessWidget {
           height: 40,
           width: 40,
         ),
+        showBtn: true,
       ),
-      bottomNavigationBar: _signinText(context),
+      bottomNavigationBar: _signupText(context),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 30.0),
         child: Column(
@@ -42,29 +42,24 @@ class SignupPage extends StatelessWidget {
                   'If You Need Any Support',
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Click Here',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                )
+                    onPressed: () {},
+                    child: const Text(
+                      'Click Here',
+                      style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600),
+                    ))
               ],
             ),
             const SizedBox(height: 26),
-            _fullNameField(context),
-            const SizedBox(height: 20),
             _emailField(context),
             const SizedBox(height: 20),
             _passwordField(context),
             const SizedBox(height: 20),
             BasicAppButton(
               onPressed: () async {
-                var result = await sl<SignupUseCase>().call(
-                  params: CreateUserReq(
-                    fullName: _fullName.text.toString(),
+                var result = await sl<SigninUseCase>().call(
+                  params: SignInUserReq(
                     email: _email.text.toString(),
                     password: _password.text.toString(),
                   ),
@@ -90,7 +85,7 @@ class SignupPage extends StatelessWidget {
                   },
                 );
               },
-              title: 'Create Account',
+              title: 'Sign In ',
             ),
           ],
         ),
@@ -100,20 +95,12 @@ class SignupPage extends StatelessWidget {
 
   Widget _registerText() {
     return const Text(
-      'Register',
+      'Sign In',
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 25,
       ),
       textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _fullNameField(BuildContext context) {
-    return TextField(
-      controller: _fullName,
-      decoration: const InputDecoration(hintText: 'Full Name')
-          .applyDefaults(Theme.of(context).inputDecorationTheme),
     );
   }
 
@@ -127,21 +114,21 @@ class SignupPage extends StatelessWidget {
 
   Widget _passwordField(BuildContext context) {
     return TextField(
-      controller: _password,
       obscureText: true,
+      controller: _password,
       decoration: const InputDecoration(hintText: 'Password')
           .applyDefaults(Theme.of(context).inputDecorationTheme),
     );
   }
 
-  Widget _signinText(BuildContext context) {
+  Widget _signupText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Do you have an account?',
+            'Not A Member?',
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
@@ -152,12 +139,12 @@ class SignupPage extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => SignInPage(),
+                  builder: (BuildContext context) => SignupPage(),
                 ),
               );
             },
             child: const Text(
-              'Sign In',
+              'Register Now',
               style: TextStyle(
                 color: Color(0xff288CE9),
                 fontWeight: FontWeight.w600,
