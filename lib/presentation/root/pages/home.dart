@@ -39,11 +39,13 @@ class _HomePageState extends State<HomePage>
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 28,
-            vertical: 12,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 40,
+              ),
               _homeTopBanner(),
               const SizedBox(
                 height: 41,

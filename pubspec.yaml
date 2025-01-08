@@ -11,19 +11,22 @@ environment:
 
 
 dependencies:
-  hydrated_bloc: ^9.1.5
-  flutter_bloc: ^8.1.6
-  path_provider: ^2.1.5
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
-  flutter_svg:
-  firebase_core:
-  firebase_auth:
-  get_it:
-  dartz:
   cloud_firestore:
+  cupertino_icons: ^1.0.8
+  dartz:
+  equatable:
+  firebase_auth:
+  firebase_core:
+  flutter_bloc: ^8.1.6
+  flutter_svg:
+  get_it:
+  hydrated_bloc: ^9.1.5
+  path_provider: ^2.1.5
+
+
 
 dev_dependencies:
   flutter_test:

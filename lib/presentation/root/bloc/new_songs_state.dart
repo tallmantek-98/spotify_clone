@@ -1,15 +1,32 @@
-import 'package:spotify_clone/domain/entities/song/song.dart';
+part of 'new_songs_bloc.dart';
 
-abstract class NewSongsState {}
+class NewSongState extends Equatable {
+  const NewSongState({
+    this.error = '',
+    this.loading = false,
+    this.songs = const [],
+  });
 
-class NewSongsLoading extends NewSongsState {}
-
-class NewSongsLoaded extends NewSongsState {
+  final String error;
+  final bool loading;
   final List<SongEntity> songs;
 
-  NewSongsLoaded({
-    required this.songs,
-  });
-}
+  NewSongState copyWith({
+    String? error,
+    bool? loading,
+    List<SongEntity>? songs,
+  }) {
+    return NewSongState(
+      error: error ?? this.error,
+      loading: loading ?? this.loading,
+      songs: songs ?? this.songs,
+    );
+  }
 
-class NewSongsLoadFailure extends NewSongsState {}
+  @override
+  List<Object?> get props => [
+        error,
+        loading,
+        songs,
+      ];
+}
